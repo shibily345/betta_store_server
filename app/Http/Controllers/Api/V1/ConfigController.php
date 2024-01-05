@@ -17,7 +17,7 @@ class ConfigController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'lat' => 'required',
-            'lng' => 'required',
+            'lng' => 'required', 
         ]);
 
         if ($validator->errors()->count()>0) {
