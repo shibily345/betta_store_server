@@ -14,13 +14,14 @@ use App\Http\Controllers\AdListController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('ad-lists/all', [AdListController::class, 'getAllRecords']);  
+Route::get('ad-lists/all', [AdListController::class, 'getAllRecords']);
 Route::group(['namespace' => 'Api\V1'], function () {
-    
+
        Route::group(['prefix' => 'products'], function () {
         Route::get('popular', 'ProductController@get_popular_products');
+        Route::get('all', 'ProductController@get_all_products');
          Route::get('recommended', 'ProductController@get_recommended_products');
-          Route::get('betta', 'ProductController@get_betta_fishes'); 
+          Route::get('betta', 'ProductController@get_betta_fishes');
           Route::get('otherfish', 'ProductController@get_otherfish');
           Route::get('items', 'ProductController@get_items');
           Route::get('feeds', 'ProductController@get_feeds');
@@ -32,17 +33,17 @@ Route::group(['namespace' => 'Api\V1'], function () {
           Route::patch('products/{id}', 'ProductController@updateProduct');
 
 
-          
-    }); 
+
+    });
         Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('register', 'CustomerAuthController@register');
         Route::post('login', 'CustomerAuthController@login');
         Route::get('users', 'CustomerAuthController@index');
-        Route::put('/user/{id}/update', 'CustomerAuthController@update'); 
+        Route::put('/user/{id}/update', 'CustomerAuthController@update');
         Route::put('reset-psd', 'CustomerAuthController@changePasswordByPhoneNumber');
         });
-   
-        
+
+
         Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
             Route::get('notifications', 'NotificationController@get_notifications');
             Route::get('info', 'CustomerController@info');
@@ -79,7 +80,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
 
         });
             });
-            
+
         Route::group(['prefix' => 'config'], function () {
         Route::get('/', 'ConfigController@configuration');
         Route::get('/get-zone-id', 'ConfigController@get_zone');
